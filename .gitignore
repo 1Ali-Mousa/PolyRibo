@@ -403,14 +403,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# VS Code files for those working on multiple tools
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-
 # Local History for Visual Studio Code
 .history/
 
@@ -426,3 +418,35 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+
+# JetBrains Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# User secrets
+secrets.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# .NET local tools
+.dotnet/
+
+# Temporary files
+*.swp
+*.swo
+
+# Ignore all appsettings files
+appsettings.json
+appsettings.*.json
+
+# Allow example configuration
+!appsettings.example.json
