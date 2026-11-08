@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="src/PolyRibo.API/PolyRibo.API.csproj" />
+    <Project Path="src/PolyRibo.Application/PolyRibo.Application.csproj" />
+    <Project Path="src/PolyRibo.Domain/PolyRibo.Domain.csproj" />
+    <Project Path="src/PolyRibo.Generation/PolyRibo.Generation.csproj" />
+    <Project Path="src/PolyRibo.Infrastructure/PolyRibo.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PolyRibo.GenerationTests/PolyRibo.GenerationTests.csproj" />
+    <Project Path="tests/PolyRibo.UnitTests/PolyRibo.UnitTests.csproj" />
+  </Folder>
+</Solution>

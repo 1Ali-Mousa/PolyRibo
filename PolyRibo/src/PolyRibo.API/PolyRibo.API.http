@@ -1,0 +1,6 @@
+@PolyRibo.API_HostAddress = http://localhost:5246
+
+GET {{PolyRibo.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
