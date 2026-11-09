@@ -1,6 +1,6 @@
 using System;
 
-namespace PolyRibo.Application.Interface.Infrastructure;
+namespace PolyRibo.Application.Interface.Infrastructure.Presistence;
 
 public interface IUnitOfWork
 {

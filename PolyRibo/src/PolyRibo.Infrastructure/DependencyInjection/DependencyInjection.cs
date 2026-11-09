@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PolyRibo.Application.Interface.Infrastructure;
+using PolyRibo.Application.Interface.Infrastructure.Repository;
+using PolyRibo.Application.Interface.Infrastructure.Presistence;
 using PolyRibo.Infrastructure.Persistence;
 using PolyRibo.Infrastructure.Repository;
 

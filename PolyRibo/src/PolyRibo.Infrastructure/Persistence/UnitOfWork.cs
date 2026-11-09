@@ -1,4 +1,4 @@
-using PolyRibo.Application.Interface.Infrastructure;
+using PolyRibo.Application.Interface.Infrastructure.Presistence;
 
 namespace PolyRibo.Infrastructure.Persistence;
 

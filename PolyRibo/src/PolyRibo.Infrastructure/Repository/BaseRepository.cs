@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PolyRibo.Application.Interface.Infrastructure;
+using PolyRibo.Application.Interface.Infrastructure.Repository;
 using PolyRibo.Domain.Entities;
 using PolyRibo.Infrastructure.Persistence;
 
