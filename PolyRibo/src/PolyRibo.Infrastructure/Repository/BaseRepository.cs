@@ -9,7 +9,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>
     where TEntity : BaseEntity
 {
     protected readonly PolyRiboDbContext _context;
-    protected readonly DbSet<TEntity> _dbSet;
+    private readonly DbSet<TEntity> _dbSet;
 
     public BaseRepository(PolyRiboDbContext context)
     {
