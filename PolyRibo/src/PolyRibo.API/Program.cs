@@ -1,5 +1,4 @@
-
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using PolyRibo.API.Middleware;
 using PolyRibo.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
