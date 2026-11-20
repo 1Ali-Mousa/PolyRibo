@@ -1,18 +1,27 @@
-
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using PolyRibo.API.Middleware;
+using PolyRibo.Application.DependencyInjection;
 using PolyRibo.Infrastructure.DependencyInjection;
+using PolyRibo.API.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Controllers
 builder.Services.AddControllers();
 
+builder.Services.AddApiBehaviorConfigurationExtension();
+//OpenAPI
 builder.Services.AddOpenApi();
 
-builder.Services.AddSwaggerGen();
-
+// Application & Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+
 
 var app = builder.Build();
+
+// Middleware
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -28,8 +37,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -9,7 +9,7 @@ internal static class RepositoryInjection
     internal static IServiceCollection AddRepository(this IServiceCollection services)
     {
         services.AddScoped<IArchitectureTypeRepository, ArchitectureTypeRepository>();
-        services.AddScoped<ICountryRepository , CountryRepository>();
+        services.AddScoped<ICountryRepository, CountryRepository>();
         services.AddScoped<IDataAccessesOfProjectRepository, DataAccessesOfProjectRepository>();
         services.AddScoped<IDataAccessTechnologyRepository, DataAccessTechnologyRepository>();
         services.AddScoped<IDatabaseRepository, DatabaseRepository>();

@@ -1,105 +1,55 @@
-using System;
+using System.Security.Authentication;
 
 namespace PolyRibo.API.Middleware;
 
 public class GlobalExceptionMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly IWebHostEnvironment _environment;
+
+    public GlobalExceptionMiddleware(RequestDelegate next, IWebHostEnvironment environment)
     {
-        private readonly RequestDelegate _next;
-        private readonly IWebHostEnvironment _env;
+        _next = next;
+        _environment = environment;
+    }
 
-        public GlobalExceptionMiddleware(
-            RequestDelegate next,
-            IWebHostEnvironment env)
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
         {
-            _next = next;
-            _env = env;
+            await _next(context);
         }
-
-        public async Task InvokeAsync(HttpContext context)
+        catch (Exception exception)
         {
-            try
-            {
-                await _next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
-        }
-
-        private async Task HandleExceptionAsync(
-            HttpContext context,
-            Exception exception)
-        {
-            int statusCode;
-            string message;
-
-            switch (exception)
-            {
-                case ArgumentOutOfRangeException ex:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    message = ex.Message;
-                    break;
-
-                case ArgumentNullException ex:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    message = ex.Message;
-                    break;
-
-                case ArgumentException ex:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    message = ex.Message;
-                    break;
-
-                case KeyNotFoundException ex:
-                    statusCode = StatusCodes.Status404NotFound;
-                    message = ex.Message;
-                    break;
-
-                case InvalidOperationException ex:
-                    statusCode = StatusCodes.Status409Conflict;
-                    message = ex.Message;
-                    break;
-
-/*                case AuthenticationException ex:
-                    statusCode = StatusCodes.Status401Unauthorized;
-                    message = ex.Message;
-                    break;*/
-
-                case UnauthorizedAccessException ex:
-                    statusCode = StatusCodes.Status403Forbidden;
-                    message = ex.Message;
-                    break;
-
-                case FormatException ex:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    message = ex.Message;
-                    break;
-
-/*                case TooManyRequestsException ex:
-                    statusCode = StatusCodes.Status429TooManyRequests;
-                    message = ex.Message;
-                    break;*/
-
-                default:
-                    statusCode = StatusCodes.Status500InternalServerError;
-
-                    message = _env.IsDevelopment()
-                        ? exception.Message
-                        : "An unexpected error occurred.";
-
-                    break;
-            }
-
-            context.Response.StatusCode = statusCode;
-
-            var response = new
-            {
-                statusCode,
-                message,
-                data = (object?)null
-            };
-
-            await context.Response.WriteAsJsonAsync(response);
+            await HandleExceptionAsync(context, exception);
         }
     }
+
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        var (statusCode, message) = exception switch
+        {
+            AuthenticationException => (StatusCodes.Status401Unauthorized, exception.Message),
+            UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, exception.Message),
+            ArgumentException => (StatusCodes.Status400BadRequest, exception.Message),
+            FormatException => (StatusCodes.Status400BadRequest, exception.Message),
+            KeyNotFoundException => (StatusCodes.Status404NotFound, exception.Message),
+            InvalidOperationException => (StatusCodes.Status409Conflict, exception.Message),
+            _ => (
+                StatusCodes.Status500InternalServerError,
+                _environment.IsDevelopment()
+                    ? exception.Message
+                    : "An unexpected error occurred."
+            )
+        };
+
+        context.Response.StatusCode = statusCode;
+
+        await context.Response.WriteAsJsonAsync(new
+        {
+            statusCode,
+            message,
+            data = (object?)null
+        });
+    }
+}
