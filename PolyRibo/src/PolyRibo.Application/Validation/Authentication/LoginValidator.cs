@@ -1,18 +1,17 @@
 using FluentValidation;
 using PolyRibo.Application.DTO.Auth.Login;
 
-namespace PolyRibo.Application.Feature.Validation.Authentication;
+namespace PolyRibo.Application.Validation.Authentication;
 
 public class LoginValidator : AbstractValidator<LoginRequest>
 {
     public LoginValidator()
     {
-        RuleFor(x => x.UserName)
+        RuleFor(request => request.UserName)
             .NotEmpty()
             .WithMessage("UserName is required.");
 
-
-        RuleFor(x => x.PasswordHashed)
+        RuleFor(request => request.Password)
             .NotEmpty()
             .WithMessage("Password is required.")
             .MinimumLength(8)

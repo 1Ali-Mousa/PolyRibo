@@ -9,16 +9,18 @@ namespace PolyRibo.API.Controllers;
 [ApiController]
 public class AuthenticationController : BaseController
 {
-    private readonly IAuthenticationService _service;
-    public AuthenticationController(IAuthenticationService service)
+    private readonly IAuthenticationService _authenticationService;
+
+    public AuthenticationController(IAuthenticationService authenticationService)
     {
-        _service = service;
+        _authenticationService = authenticationService;
     }
 
-    public async Task<ActionResult<APIResponse<LoginResponse>>> LoginAsync(LoginRequest request)
+    [HttpPost(Name = "LoginAsync")]
+    public async Task<ActionResult<APIResponse<LoginResponse>>> LoginAsync([FromBody] LoginRequest request)
     {
-        var response = await _service.LoginAsync(request);
-        return CreateResponse<LoginResponse>(response, StatusCodes.Status200OK ,"Login Successfully!");
-    }
+        var response = await _authenticationService.LoginAsync(request);
 
+        return CreateResponse(response, StatusCodes.Status200OK, "Login Successfully!");
+    }
 }

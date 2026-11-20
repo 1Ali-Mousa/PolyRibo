@@ -10,5 +10,5 @@ public static class DependencyInjection
         services.AddService();
         services.AddValidation();
         return services;
-    } 
+    }
 }
