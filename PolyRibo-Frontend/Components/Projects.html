@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PolyRibo projects workspace.">
+  <title>Projects · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="projects">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Workspace</p>
+            <h1 class="page-title">Projects</h1>
+            <p class="page-subtitle">Generated starters and project configurations.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn--primary" href="NewProject.html">
+              <i data-lucide="plus" aria-hidden="true"></i>
+              New project
+            </a>
+          </div>
+        </header>
+
+        <section class="notice notice--info" aria-label="Project API status">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <div>
+            <strong>Project endpoints are not available yet.</strong>
+            The current backend only exposes Login and Register. This page shows an empty state
+            instead of inventing project data. The <a class="text-link" href="NewProject.html">New project</a>
+            page lets you preview the configuration flow.
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="projectsEmptyTitle">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">
+              <i data-lucide="folder-kanban"></i>
+            </span>
+            <h2 id="projectsEmptyTitle">No projects to show</h2>
+            <p>
+              Once the project API is added, this area will list each generated project with its
+              framework, architecture, database, and creation date.
+            </p>
+            <a class="btn btn--primary" href="NewProject.html">
+              <i data-lucide="wand-sparkles" aria-hidden="true"></i>
+              Preview project setup
+            </a>
+          </div>
+        </section>
+
+        <div class="dashboard-grid dashboard-grid--spaced">
+          <section class="card card--accent-yellow" aria-labelledby="projectFieldsTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="projectFieldsTitle">What a project will contain</h2>
+                <p class="card-subtitle">Based on the existing domain model.</p>
+              </div>
+            </header>
+            <ul class="status-list">
+              <li><span class="status-badge status-badge--pending">Core</span>Name, description, and creation date</li>
+              <li><span class="status-badge status-badge--pending">Stack</span>Framework, language, and architecture type</li>
+              <li><span class="status-badge status-badge--pending">Source</span>Database and schema tables</li>
+              <li><span class="status-badge status-badge--pending">Extras</span>Packages, data access technologies, Git, and Docker</li>
+            </ul>
+          </section>
+
+          <section class="card card--accent-green" aria-labelledby="projectNextTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="projectNextTitle">Next step</h2>
+                <p class="card-subtitle">Prepare a configuration while the API is being built.</p>
+              </div>
+            </header>
+            <div class="card-body">
+              <p class="card-text">
+                The setup preview validates every step in the browser. It does not send data to
+                the backend and it does not generate files yet.
+              </p>
+              <a class="btn btn--secondary" href="NewProject.html">
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                Open setup preview
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+</body>
+</html>

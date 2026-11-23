@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PolyRibo workspace dashboard for database-to-project generation.">
+  <title>Dashboard · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="dashboard">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Workspace</p>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">Your database-to-project workspace at a glance.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn--secondary" href="Databases.html">
+              <i data-lucide="database" aria-hidden="true"></i>
+              Databases
+            </a>
+            <a class="btn btn--primary" href="NewProject.html">
+              <i data-lucide="wand-sparkles" aria-hidden="true"></i>
+              New project
+            </a>
+          </div>
+        </header>
+
+        <section class="hero-card" aria-labelledby="heroTitle">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Database → Project</p>
+            <h2 class="hero-title" id="heroTitle">Turn a schema into a clean starter project.</h2>
+            <p class="hero-text">
+              PolyRibo is built around one flow: bring a database schema, choose your stack and
+              architecture, review the setup, then generate a starter CRUD project. The frontend
+              is ready; the project, database, and generation endpoints are still being built.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="NewProject.html">
+                <i data-lucide="play" aria-hidden="true"></i>
+                Start a setup
+              </a>
+              <a class="btn" href="Projects.html">
+                <i data-lucide="folder-kanban" aria-hidden="true"></i>
+                View projects
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="terminal-card">
+              <div class="terminal-bar">
+                <span class="terminal-dot terminal-dot--pink"></span>
+                <span class="terminal-dot terminal-dot--yellow"></span>
+                <span class="terminal-dot terminal-dot--green"></span>
+                <span class="terminal-title">polyribo — workspace</span>
+              </div>
+              <pre class="terminal-body"><code><span class="t-prompt">$</span> polyribo status
+<span class="t-muted">→ auth api: ready</span>
+<span class="t-muted">→ project api: pending</span>
+<span class="t-muted">→ generation api: pending</span>
+<span class="t-cursor">▌</span></code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Workspace summary">
+          <article class="stat-card stat-card--pink">
+            <span class="stat-label">Projects</span>
+            <span class="stat-value">—</span>
+            <p class="stat-note">Counts appear when the project API is available.</p>
+          </article>
+          <article class="stat-card stat-card--purple">
+            <span class="stat-label">Databases</span>
+            <span class="stat-value">—</span>
+            <p class="stat-note">Database upload and listing endpoints are not implemented.</p>
+          </article>
+          <article class="stat-card stat-card--green">
+            <span class="stat-label">Generations</span>
+            <span class="stat-value">—</span>
+            <p class="stat-note">Generation history will appear after a generation endpoint exists.</p>
+          </article>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="card" aria-labelledby="quickStartTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="quickStartTitle">Quick start</h2>
+                <p class="card-subtitle">The intended PolyRibo workflow.</p>
+              </div>
+              <span class="badge badge--yellow">6 steps</span>
+            </header>
+            <ol class="checklist">
+              <li><span><strong>Add a database</strong>Use a backup file or connection details.</span></li>
+              <li><span><strong>Choose a framework</strong>Pick the target framework and version.</span></li>
+              <li><span><strong>Choose an architecture</strong>Clean, layered, or another style.</span></li>
+              <li><span><strong>Select technologies</strong>Data access, packages, Git, and Docker.</span></li>
+              <li><span><strong>Review the setup</strong>Check every choice before generating.</span></li>
+              <li><span><strong>Generate the project</strong>Download a starter CRUD project.</span></li>
+            </ol>
+          </section>
+
+          <section class="card" aria-labelledby="statusTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="statusTitle">Backend status</h2>
+                <p class="card-subtitle">What the current API actually exposes.</p>
+              </div>
+              <span class="badge badge--green">Partial</span>
+            </header>
+            <ul class="status-list">
+              <li>
+                <span class="status-badge status-badge--ok">Available</span>
+                Login and Register
+                <code>/api/Authentication/*</code>
+              </li>
+              <li>
+                <span class="status-badge status-badge--pending">Missing</span>
+                Countries, projects, databases, and generation endpoints
+              </li>
+              <li>
+                <span class="status-badge status-badge--off">CORS</span>
+                Not configured in <code>Program.cs</code>
+              </li>
+            </ul>
+            <p class="card-note">
+              The application pages are intentionally honest about this: empty states and
+              configuration previews are shown instead of invented data. See
+              <a class="text-link" href="Settings.html">Settings</a> for the API connection details.
+            </p>
+          </section>
+        </div>
+
+        <section class="card" aria-labelledby="activityTitle">
+          <header class="card-header">
+            <div>
+              <h2 class="card-title" id="activityTitle">Recent activity</h2>
+              <p class="card-subtitle">Generation runs and project changes.</p>
+            </div>
+            <a class="text-link" href="GenerationHistory.html">View history</a>
+          </header>
+          <div class="empty-state empty-state--compact">
+            <span class="empty-icon" aria-hidden="true">
+              <i data-lucide="activity"></i>
+            </span>
+            <h3>No activity yet</h3>
+            <p>Activity will appear here once project and generation endpoints are available.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+</body>
+</html>

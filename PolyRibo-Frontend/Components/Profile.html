@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PolyRibo account and profile information.">
+  <title>Profile · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="profile">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Preferences</p>
+            <h1 class="page-title">Profile</h1>
+            <p class="page-subtitle">Account details returned by the existing authentication API.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn--primary" href="Login.html">
+              <i data-lucide="log-in" aria-hidden="true"></i>
+              Sign in
+            </a>
+          </div>
+        </header>
+
+        <section class="notice notice--info" aria-label="Profile API status">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <div>
+            <strong>No profile endpoint is available.</strong>
+            The backend only returns account details as part of a successful Login response. It
+            does not expose a profile or account update endpoint, and this frontend does not keep
+            a fake login session.
+          </div>
+        </section>
+
+        <div class="settings-grid">
+          <section class="card card--accent-purple" aria-labelledby="accountTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="accountTitle">Account data</h2>
+                <p class="card-subtitle">Nothing is loaded because there is no profile request to make.</p>
+              </div>
+              <span class="badge badge--soft">Not loaded</span>
+            </header>
+            <div class="card-body">
+              <dl class="detail-list">
+                <dt>Username</dt>
+                <dd>—</dd>
+                <dt>Email</dt>
+                <dd>—</dd>
+                <dt>Country ID</dt>
+                <dd>—</dd>
+                <dt>Session</dt>
+                <dd>Not stored</dd>
+              </dl>
+              <p class="card-note">
+                Signing in shows the account name returned by the API, but this application does
+                not create a session, store a token, or persist account data.
+              </p>
+            </div>
+          </section>
+
+          <section class="card card--accent-yellow" aria-labelledby="loginResponseTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="loginResponseTitle">Login response contract</h2>
+                <p class="card-subtitle">The only account data the API currently returns.</p>
+              </div>
+            </header>
+            <div class="card-body">
+              <pre class="code-block"><code>{
+  "statusCode": 200,
+  "message": "Login Successfully!",
+  "data": {
+    "userName": "...",
+    "email": "...",
+    "countryId": 1
+  }
+}</code></pre>
+              <p class="card-note">
+                A future profile page can use these fields after a proper backend endpoint and
+                authentication decision are added.
+              </p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+</body>
+</html>
