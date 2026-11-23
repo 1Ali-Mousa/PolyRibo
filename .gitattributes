@@ -1,0 +1,4 @@
+# Frontend languages
+PolyRibo-Frontend/**/*.html linguist-detectable=true
+PolyRibo-Frontend/**/*.css linguist-detectable=true
+PolyRibo-Frontend/**/*.js linguist-detectable=true
