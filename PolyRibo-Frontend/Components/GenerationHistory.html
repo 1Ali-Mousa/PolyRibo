@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PolyRibo generation history.">
+  <title>Generation history · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="history">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Generation</p>
+            <h1 class="page-title">Generation history</h1>
+            <p class="page-subtitle">A record of starter projects generated from your databases.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn--primary" href="NewProject.html">
+              <i data-lucide="wand-sparkles" aria-hidden="true"></i>
+              New project
+            </a>
+          </div>
+        </header>
+
+        <section class="notice notice--info" aria-label="Generation API status">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <div>
+            <strong>Generation history is not available yet.</strong>
+            The backend has no generation run or history endpoint. This page will stay empty
+            until those endpoints are implemented.
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="historyEmptyTitle">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">
+              <i data-lucide="history"></i>
+            </span>
+            <h2 id="historyEmptyTitle">No generation runs</h2>
+            <p>
+              Each run will eventually show the project name, framework, architecture, database,
+              status, and timestamp. No placeholder runs are shown because that would look like
+              real history.
+            </p>
+            <a class="btn btn--secondary" href="NewProject.html">
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+              Preview a setup
+            </a>
+          </div>
+        </section>
+
+        <div class="dashboard-grid dashboard-grid--spaced">
+          <section class="card card--accent-pink" aria-labelledby="historyFieldsTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="historyFieldsTitle">Planned history columns</h2>
+                <p class="card-subtitle">Based on the intended workflow.</p>
+              </div>
+            </header>
+            <ul class="status-list">
+              <li><span class="status-badge status-badge--pending">Run</span>Project name and generation date</li>
+              <li><span class="status-badge status-badge--pending">Stack</span>Framework, language, and architecture</li>
+              <li><span class="status-badge status-badge--pending">Source</span>Database and schema snapshot</li>
+              <li><span class="status-badge status-badge--pending">Result</span>Status and download link</li>
+            </ul>
+          </section>
+
+          <section class="card card--accent-yellow" aria-labelledby="historyMissingTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="historyMissingTitle">Blocked by missing endpoints</h2>
+                <p class="card-subtitle">Needed before this page can show real data.</p>
+              </div>
+            </header>
+            <ul class="status-list">
+              <li><span class="status-badge status-badge--off">Missing</span>Start a generation run</li>
+              <li><span class="status-badge status-badge--off">Missing</span>Read generation status</li>
+              <li><span class="status-badge status-badge--off">Missing</span>List past runs</li>
+              <li><span class="status-badge status-badge--off">Missing</span>Download generated files</li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+</body>
+</html>

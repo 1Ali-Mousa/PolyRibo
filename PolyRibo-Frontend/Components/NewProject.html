@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Configure a new PolyRibo starter project from a database schema.">
+  <title>New project · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="new-project">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Generation</p>
+            <h1 class="page-title">New project</h1>
+            <p class="page-subtitle">Prepare a database-to-project configuration step by step.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn" href="Projects.html">
+              <i data-lucide="arrow-left" aria-hidden="true"></i>
+              Back to projects
+            </a>
+          </div>
+        </header>
+
+        <section class="notice notice--warn" aria-label="Generation API status">
+          <i data-lucide="alert-triangle" aria-hidden="true"></i>
+          <div>
+            <strong>Configuration preview only.</strong>
+            The backend does not expose project creation or generation endpoints yet. This form
+            validates your choices in the browser and never sends them anywhere. It does not
+            generate files or claim that a project was created.
+          </div>
+        </section>
+
+        <ol class="stepper" aria-label="Project setup steps">
+          <li class="stepper-item is-active" data-step-indicator="1">
+            <span class="stepper-number">1</span>
+            <span>Project &amp; database</span>
+          </li>
+          <li class="stepper-item" data-step-indicator="2">
+            <span class="stepper-number">2</span>
+            <span>Framework &amp; architecture</span>
+          </li>
+          <li class="stepper-item" data-step-indicator="3">
+            <span class="stepper-number">3</span>
+            <span>Technologies</span>
+          </li>
+          <li class="stepper-item" data-step-indicator="4">
+            <span class="stepper-number">4</span>
+            <span>Review</span>
+          </li>
+        </ol>
+
+        <form id="projectWizard" class="wizard" novalidate>
+          <fieldset class="wizard-step" data-step="1">
+            <legend>Project and database</legend>
+            <p class="step-intro">
+              Start with a project name and the database source. File selection and connection
+              details stay in this page because no upload endpoint exists yet.
+            </p>
+
+            <div class="form-grid">
+              <div class="form-field form-field--full">
+                <label for="projectName">Project name</label>
+                <input
+                  id="projectName"
+                  name="projectName"
+                  type="text"
+                  placeholder="e.g. InventoryApi"
+                  maxlength="150"
+                  autocomplete="off"
+                  required
+                >
+                <span class="field-hint">Maximum 150 characters, matching the backend model.</span>
+              </div>
+
+              <div class="form-field form-field--full">
+                <label for="projectDescription">Description <span class="field-hint">(optional)</span></label>
+                <textarea
+                  id="projectDescription"
+                  name="description"
+                  placeholder="What is this project for?"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <div class="form-field">
+                <label for="databaseSource">Database source</label>
+                <select id="databaseSource" name="databaseSource" required>
+                  <option value="backup">Backup file</option>
+                  <option value="connection">Connection details</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="databaseName">Database name</label>
+                <input
+                  id="databaseName"
+                  name="databaseName"
+                  type="text"
+                  placeholder="e.g. InventoryDB"
+                  maxlength="150"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field form-field--full" data-source-fields="backup">
+                <label for="backupFile">Backup file <span class="field-hint">(local preview)</span></label>
+                <input id="backupFile" name="backupFile" type="file" accept=".bak,.sql,.zip">
+                <span class="field-hint">The selected file is not uploaded. No upload endpoint is available.</span>
+              </div>
+
+              <div class="form-field form-field--full" data-source-fields="connection" hidden>
+                <label for="connectionDetails">Connection details</label>
+                <textarea
+                  id="connectionDetails"
+                  name="connectionDetails"
+                  placeholder="Server, database, authentication mode…"
+                  rows="3"
+                  required
+                ></textarea>
+                <span class="field-hint">Do not enter production secrets. Nothing is sent or stored.</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="wizard-step" data-step="2" hidden>
+            <legend>Framework and architecture</legend>
+            <p class="step-intro">
+              The backend stores framework and architecture types as database records. There is
+              no endpoint to load those records yet, so these fields accept free text for now.
+            </p>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="frameworkName">Framework</label>
+                <input
+                  id="frameworkName"
+                  name="frameworkName"
+                  type="text"
+                  placeholder="e.g. ASP.NET Core"
+                  maxlength="100"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="frameworkVersion">Framework version</label>
+                <input
+                  id="frameworkVersion"
+                  name="frameworkVersion"
+                  type="text"
+                  placeholder="e.g. 10.0"
+                  maxlength="50"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="language">Language</label>
+                <input
+                  id="language"
+                  name="language"
+                  type="text"
+                  placeholder="e.g. C#"
+                  maxlength="100"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="architecture">Architecture</label>
+                <input
+                  id="architecture"
+                  name="architecture"
+                  type="text"
+                  placeholder="e.g. Clean Architecture"
+                  maxlength="100"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field form-field--full">
+                <label for="architectureNotes">Architecture notes <span class="field-hint">(optional)</span></label>
+                <textarea
+                  id="architectureNotes"
+                  name="architectureNotes"
+                  placeholder="Layering rules, naming conventions, or folders to include."
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="wizard-step" data-step="3" hidden>
+            <legend>Technologies and packages</legend>
+            <p class="step-intro">
+              Choose data access and optional tooling. These fields mirror the related entities
+              in the existing domain model.
+            </p>
+
+            <div class="form-grid">
+              <div class="form-field form-field--full">
+                <label for="dataAccess">Data access technology</label>
+                <input
+                  id="dataAccess"
+                  name="dataAccess"
+                  type="text"
+                  placeholder="e.g. Entity Framework Core"
+                  maxlength="100"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <div class="form-field form-field--full">
+                <label for="packages">Packages <span class="field-hint">(one per line or comma separated)</span></label>
+                <textarea
+                  id="packages"
+                  name="packages"
+                  placeholder="e.g. FluentValidation, Serilog, Swashbuckle"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <div class="form-field form-field--full">
+                <label class="toggle-row" for="gitEnabled">
+                  <input id="gitEnabled" name="gitEnabled" type="checkbox">
+                  <span>
+                    <strong>Git configuration</strong>
+                    Create a repository configuration for the generated project.
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field" data-git-fields hidden>
+                <label for="gitRemoteUrl">Remote URL <span class="field-hint">(optional)</span></label>
+                <input
+                  id="gitRemoteUrl"
+                  name="gitRemoteUrl"
+                  type="url"
+                  placeholder="https://github.com/you/project.git"
+                  autocomplete="off"
+                >
+              </div>
+
+              <div class="form-field" data-git-fields hidden>
+                <label for="gitBranch">Default branch</label>
+                <input
+                  id="gitBranch"
+                  name="gitBranch"
+                  type="text"
+                  placeholder="main"
+                  maxlength="100"
+                  autocomplete="off"
+                >
+              </div>
+
+              <div class="form-field form-field--full">
+                <label class="toggle-row" for="dockerEnabled">
+                  <input id="dockerEnabled" name="dockerEnabled" type="checkbox">
+                  <span>
+                    <strong>Docker configuration</strong>
+                    Add container files to the generated project.
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field form-field--full" data-docker-fields hidden>
+                <label class="toggle-row" for="dockerFileEnabled">
+                  <input id="dockerFileEnabled" name="dockerFileEnabled" type="checkbox">
+                  <span>Include a Dockerfile</span>
+                </label>
+                <label class="toggle-row" for="composeEnabled">
+                  <input id="composeEnabled" name="composeEnabled" type="checkbox">
+                  <span>Include a Docker Compose file</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="wizard-step" data-step="4" hidden>
+            <legend>Review the configuration</legend>
+            <p class="step-intro">
+              Check the values below. The summary is generated from the form in your browser.
+            </p>
+
+            <dl class="review-list" id="reviewList"></dl>
+
+            <div class="notice notice--warn notice--spaced">
+              <i data-lucide="alert-triangle" aria-hidden="true"></i>
+              <div>
+                <strong>Generation is not available yet.</strong>
+                The current backend has no endpoint for creating a project or generating files.
+                The button below is disabled on purpose.
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary" type="button" disabled>
+                <i data-lucide="wand-sparkles" aria-hidden="true"></i>
+                Generate project
+              </button>
+              <span class="field-hint">Waiting for a generation endpoint</span>
+            </div>
+          </fieldset>
+
+          <div class="form-status" id="wizardStatus" role="status" aria-live="polite" hidden></div>
+
+          <div class="wizard-actions">
+            <button class="btn btn--ghost" type="button" id="wizardReset">
+              <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+              Reset
+            </button>
+            <div class="wizard-actions-right">
+              <button class="btn" type="button" id="wizardBack" hidden>
+                <i data-lucide="arrow-left" aria-hidden="true"></i>
+                Back
+              </button>
+              <button class="btn btn--primary" type="button" id="wizardNext">
+                Next
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+  <script src="../Js/NewProject.js"></script>
+</body>
+</html>

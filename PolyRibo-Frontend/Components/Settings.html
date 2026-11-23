@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PolyRibo frontend settings and API connection details.">
+  <title>Settings · PolyRibo</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F76CA8' stroke='%23171717' stroke-width='3'/%3E%3Crect x='8' y='9' width='16' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='14.4' width='11' height='3.2' rx='1.6' fill='%23171717'/%3E%3Crect x='8' y='19.8' width='7' height='3.2' rx='1.6' fill='%23171717'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/App.css">
+</head>
+<body class="app-body" data-page="settings">
+  <div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main navigation"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar"></header>
+
+      <main class="app-content">
+        <nav class="breadcrumbs" data-breadcrumbs aria-label="Breadcrumb"></nav>
+
+        <header class="page-header">
+          <div>
+            <p class="page-kicker">Preferences</p>
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Configure how the frontend reaches the existing PolyRibo API.</p>
+          </div>
+        </header>
+
+        <div class="settings-grid">
+          <section class="card card--accent-pink" aria-labelledby="apiSettingsTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="apiSettingsTitle">API connection</h2>
+                <p class="card-subtitle">The base URL used by Login, Register, and the setup preview.</p>
+              </div>
+              <span class="badge badge--yellow">Local</span>
+            </header>
+
+            <div class="card-body">
+              <form id="apiSettingsForm" novalidate>
+                <div class="form-field">
+                  <label for="apiBaseUrl">API base URL</label>
+                  <input
+                    id="apiBaseUrl"
+                    name="apiBaseUrl"
+                    type="url"
+                    placeholder="http://localhost:5246"
+                    spellcheck="false"
+                    autocomplete="off"
+                    required
+                  >
+                  <span class="field-hint">Only this URL is stored in localStorage. No credentials are stored.</span>
+                </div>
+
+                <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+                <div class="form-actions">
+                  <button class="btn btn--primary" type="submit">
+                    <i data-lucide="save" aria-hidden="true"></i>
+                    Save URL
+                  </button>
+                  <button class="btn btn--secondary" type="button" id="testApiButton">
+                    <i data-lucide="plug-zap" aria-hidden="true"></i>
+                    Test connection
+                  </button>
+                  <button class="btn btn--ghost" type="button" id="resetApiButton">
+                    <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+                    Reset
+                  </button>
+                </div>
+              </form>
+
+              <p class="card-note">
+                Current page origin: <code data-current-origin>—</code><br>
+                The backend is configured to listen on <code>http://localhost:5246</code> in
+                <code>Properties/launchSettings.json</code>.
+              </p>
+            </div>
+          </section>
+
+          <section class="card card--accent-yellow" aria-labelledby="corsTitle">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title" id="corsTitle">CORS note</h2>
+                <p class="card-subtitle">Why a request may fail from Live Server.</p>
+              </div>
+              <span class="badge badge--pink">Important</span>
+            </header>
+            <div class="card-body">
+              <p class="card-text">
+                The current <code>Program.cs</code> does not call <code>AddCors</code> or
+                <code>UseCors</code>. A browser page served by Live Server is a different origin,
+                so the API response will be blocked by CORS even when the API is running.
+              </p>
+              <p class="card-subtitle">
+                The example settings file already lists allowed origins, but the running
+                application does not read or apply them. The backend must add its existing CORS
+                configuration for the frontend origin to work.
+              </p>
+              <p class="card-subtitle">
+                Do not disable browser security to work around this. The frontend cannot fix CORS
+                by itself.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <section class="card card--accent-purple card--spaced" aria-labelledby="endpointsTitle">
+          <header class="card-header">
+            <div>
+              <h2 class="card-title" id="endpointsTitle">Endpoints used by this frontend</h2>
+              <p class="card-subtitle">These are the only API routes the frontend calls.</p>
+            </div>
+          </header>
+          <div class="card-body">
+            <pre class="code-block"><code>POST /api/Authentication/Login
+POST /api/Authentication/Register
+
+Login body:    { "userName": "...", "password": "..." }
+Register body: { "userName": "...", "email": "...", "password": "...", "countryId": 1 }</code></pre>
+            <p class="card-note">
+              No project, database, country, or generation routes are called because the current
+              backend does not expose them.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="../Js/Ui.js"></script>
+  <script src="../Js/Api.js"></script>
+  <script src="../Js/App.js"></script>
+  <script src="../Js/Settings.js"></script>
+</body>
+</html>
