@@ -1,6 +1,7 @@
 using PolyRibo.API.Middleware;
 using PolyRibo.Application.DependencyInjection;
 using PolyRibo.Infrastructure.DependencyInjection;
+using PolyRibo.API.Transformer;
 using PolyRibo.API.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddApiBehaviorConfigurationExtension();
 //OpenAPI
-builder.Services.AddOpenApi();
-
+builder.Services.AddOpenApi(options =>
+{
+    options.AddOperationTransformer<DefaultResponsesOperationTransformer>();
+});
 // Application & Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
