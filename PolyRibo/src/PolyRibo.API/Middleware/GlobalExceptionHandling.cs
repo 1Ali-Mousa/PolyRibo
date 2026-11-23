@@ -1,4 +1,6 @@
 using System.Security.Authentication;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace PolyRibo.API.Middleware;
 
@@ -51,5 +53,16 @@ public class GlobalExceptionMiddleware
             message,
             data = (object?)null
         });
+    }
+
+    private static bool IsCountriesRequest(HttpContext context)
+    {
+        return context.Request.Path.StartsWithSegments("/api/Countries");
+    }
+
+    private static bool HasSqlErrorNumber(DbUpdateException exception, int errorNumber)
+    {
+        return exception.InnerException is SqlException sqlException
+            && sqlException.Number == errorNumber;
     }
 }
